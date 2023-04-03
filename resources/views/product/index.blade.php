@@ -58,7 +58,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">แก้ไขบริษัท</h5>
+                                        <h5 class="modal-title">แก้ไขรายการอุปกรณ์</h5>
                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                         </button>
                                     </div>
@@ -109,8 +109,8 @@
                                 <tr>
                                     <th></th>
                                     <th>ชื่อ</th>
-                                    <th>ราคา</th>
-                                    <th>หมวดหมู่</th>
+                                    <th width="100">ราคา</th>
+                                    <th width="100">หมวดหมู่</th>
                                     <th width="100">สถานะ</th>
                                     <th>#</th>
                                 </tr>

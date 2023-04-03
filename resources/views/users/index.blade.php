@@ -5,9 +5,6 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">หมวดหมู่อุปกรณ์</h4>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalInsert">
-                            เพิ่มหมวดหมู่อุปกรณ์<span class="btn-icon-right"><i class="fa fa-plus"></i></span></button>
                         <div class="modal fade" id="myModalInsert">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -21,64 +18,21 @@
                                             @csrf
                                             <div class="form-group">
                                                 <label for="CategoryName" class="col-form-label">ชื่อหมวดหมู่:</label>
-                                                <input type="text" class="form-control" id="CategoryName"
-                                                       name="CategoryName">
+                                                <input type="text" class="form-control" id="CategoryName" name="CategoryName">
                                             </div>
                                             <div class="form-group">
                                                 <label for="status" class="col-form-label">สถานะ: </label>
                                                 <div class="form-check form-check-inline">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" value="0"
-                                                               id="status" name="status">ปิดใช้งาน</label>
+                                                        <input type="checkbox" class="form-check-input" value="0" id="status" name="status">ปิดใช้งาน</label>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary text-white" data-dismiss="modal"
-                                                onclick="ccin()">ยกเลิก
+                                        <button type="button" class="btn btn-secondary text-white" data-dismiss="modal" onclick="ccin()">ยกเลิก
                                         </button>
                                         <button type="button" class="btn btn-primary" onclick="checkInput()">เพิ่ม
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal fade" id="myModalUpdate">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">แก้ไขหมวดหมู่อุปกรณ์</h5>
-                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="formUpdate" autocomplete="off">
-                                            @csrf
-                                            <input type="hidden" id="IdEdit" name="id">
-                                            <input type="hidden" id="_method" name="_method" value="PUT">
-                                            <div class="form-group">
-                                                <label for="CategoryNameEdit"
-                                                       class="col-form-label">ชื่อช่องทางขนส่ง:</label>
-                                                <input type="text" class="form-control" id="CategoryNameEdit"
-                                                       name="CategoryName">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="statusEdit" class="col-form-label">สถานะ: </label>
-                                                <div class="form-check form-check-inline">
-                                                    <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" value="0"
-                                                               id="statusEdit" name="status">ปิดใช้งาน</label>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary text-white" data-dismiss="modal"
-                                                onclick="ccin()">ยกเลิก
-                                        </button>
-                                        <button type="button" class="btn btn-primary" onclick="checkInputUpdate()">
-                                            บันทึก
                                         </button>
                                     </div>
                                 </div>
@@ -90,7 +44,7 @@
                                 <tr>
                                     <th></th>
                                     <th>ชื่อ</th>
-                                    <th>สถานะ</th>
+                                    <th>อีเมล์</th>
                                     <th>#</th>
                                 </tr>
                                 </thead>
@@ -108,9 +62,9 @@
 @section('script')
     <script>
         var strBtnAction =
-            // "<button class='btn mb-1 btn-info text-white details-control' style='margin-right: 20px;'>" +
-            // "<i class='fa fa-eye'></i>" +
-            // "</button>" +
+            "<button class='btn mb-1 btn-info text-white details-control' style='margin-right: 20px;'>" +
+            "<i class='fa fa-eye'></i>" +
+            "</button>" +
             "<button class='btn mb-1 btn-warning text-white edit-control' style='margin-right: 20px;'>" +
             "<i class='fa fa-edit'></i>" +
             "</button>" +
@@ -130,7 +84,7 @@
                 serverSide: true ,
                 destroy: true ,
                 ajax: {
-                    url: '{{ url('product-category/all') }}' ,
+                    url: '{{ url('users/all') }}' ,
                     type: "GET" ,
                     dataFilter: function (reps) {
                         swal.close();
@@ -154,14 +108,15 @@
                         searchable: false ,
                         visible: false
                     } ,
-                    { data: 'CategoryName' } ,
-                    {
-                        "data": 'CategoryStatus' ,
-                        render: function (data) {
-                            return checkStatus(data)
-                        } ,
-                        defaultContent: '<p></p>'
-                    } ,
+                    { data: 'name' } ,
+                    { data: 'email' } ,
+                    // {
+                    //     "data": 'CategoryStatus' ,
+                    //     render: function (data) {
+                    //         return checkStatus(data)
+                    //     } ,
+                    //     defaultContent: '<p></p>'
+                    // } ,
                     {
                         "class": "" ,
                         "orderable": false ,

@@ -10,4 +10,9 @@ class FormsTable extends Model
     use HasFactory;
 
     protected $table = 'forms_tables';
+
+    protected $fillable = [
+        'id',
+        'user_id',
+    ];
 }

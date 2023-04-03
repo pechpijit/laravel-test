@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\FormsController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/product-category', ProductCategoryController::class);
     Route::resource('/products', ProductsController::class);
+    Route::resource('/users', UsersController::class);
+    Route::resource('/form', FormsController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

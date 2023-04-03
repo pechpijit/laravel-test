@@ -301,14 +301,14 @@
                     {{--                    </a>--}}
                     {{--                </li>--}}
                     <li>
-                        <a href="{{ url('employee') }}" aria-expanded="false">
+                        <a href="{{ url('users') }}" aria-expanded="false">
                             <i class="icon-people menu-icon"></i><span class="nav-text">รายชื่อพนักงาน</span>
                         </a>
                     </li>
                 @endif
                 <li class="nav-label">พนักงาน</li>
                 <li>
-                    <a href="{{ url('/user/form') }}" aria-expanded="false">
+                    <a href="{{ url('form') }}" aria-expanded="false">
                         <i class="icon-book-open menu-icon"></i><span class="nav-text">แบบฟอร์ม</span>
                     </a>
                 </li>
