@@ -16,7 +16,6 @@ class ProductsTable extends Model
         'id',
         'ProductName',
         'ProductPrice',
-        'ProductMaxRequest',
         'ProductStatus',
         'category_id',
     ];
@@ -24,5 +23,10 @@ class ProductsTable extends Model
     public function categoryTable()
     {
         return $this->belongsTo(ProductCategoryTable::class,'category_id');
+    }
+
+    public function formDetailTable()
+    {
+        return $this->hasMany(FormDetailTable::class);
     }
 }

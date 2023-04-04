@@ -22,6 +22,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Route::view('/welcome', 'dashboard', ['name' => 'Taylor']);
+
 //Route::get('/dashboard', function () {
 //    return view('home');
 //})->middleware(['auth', 'verified'])->name('dashboard');

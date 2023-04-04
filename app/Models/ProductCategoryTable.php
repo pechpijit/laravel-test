@@ -14,7 +14,9 @@ class ProductCategoryTable extends Model
 
     protected $fillable = [
         'id',
-        'CategoryName'
+        'CategoryName',
+        'CategoryStatus',
+        'CategoryMaxRequest',
     ];
 
     public function productsTable()

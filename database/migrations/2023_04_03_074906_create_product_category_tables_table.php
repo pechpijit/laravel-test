@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create((new ProductCategoryTable())->getTable(), function (Blueprint $table) {
             $table->id();
             $table->string('CategoryName');
+            $table->integer('CategoryMaxRequest')->default(1);
             $table->integer('CategoryStatus')->default(1);
             $table->timestamps();
         });

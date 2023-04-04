@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('ProductName');
             $table->decimal('ProductPrice',10,2);
-            $table->integer('ProductMaxRequest')->default(-1);
             $table->integer('ProductStatus')->default(1);
             $table->unsignedBigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on((new ProductCategoryTable())->getTable());

@@ -14,7 +14,7 @@
                                 <tr>
                                     <th></th>
                                     <th>ชื่อ</th>
-                                    <th>สถานะ</th>
+                                    <th>เวลา</th>
                                     <th>#</th>
                                 </tr>
                                 </thead>
@@ -35,9 +35,9 @@
             "<button class='btn mb-1 btn-info text-white details-control' style='margin-right: 20px;'>" +
             "<i class='fa fa-eye'></i>" +
             "</button>" +
-            "<button class='btn mb-1 btn-warning text-white edit-control' style='margin-right: 20px;'>" +
-            "<i class='fa fa-edit'></i>" +
-            "</button>" +
+            // "<button class='btn mb-1 btn-warning text-white edit-control' style='margin-right: 20px;'>" +
+            // "<i class='fa fa-edit'></i>" +
+            // "</button>" +
             "<button class='btn mb-1 btn-danger delete-control'>" +
             "<i class='fa fa-trash'></i>" +
             "</button>";
@@ -47,6 +47,19 @@
             swal.showLoading();
             loadDatable();
         });
+
+        function timeConverter(UNIX_timestamp){
+            var a = new Date(UNIX_timestamp * 1000);
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var year = a.getFullYear();
+            var month = months[a.getMonth()];
+            var date = a.getDate();
+            var hour = a.getHours();
+            var min = a.getMinutes();
+            var sec = a.getSeconds();
+            var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+            return time;
+        }
 
         function loadDatable() {
             var dt = $('#data-server-side').DataTable({
@@ -78,13 +91,14 @@
                         searchable: false ,
                         visible: false
                     } ,
-                    { data: 'CategoryName' } ,
                     {
-                        "data": 'CategoryStatus' ,
+                        "data": 'users_table' ,
                         render: function (data) {
-                            return checkStatus(data)
+                            return data['name']
                         } ,
-                        defaultContent: '<p></p>'
+                    } ,
+                    {
+                        "data": 'create_date' ,
                     } ,
                     {
                         "class": "" ,

@@ -25,6 +25,10 @@
                                                        name="CategoryName">
                                             </div>
                                             <div class="form-group">
+                                                <label for="CategoryMaxRequest" class="col-form-label">จำนวนสูงสุดที่เบิกได้: (-1 คือไม่จำกัด)</label>
+                                                <input type="number" class="form-control" id="CategoryMaxRequest" name="CategoryMaxRequest" value="-1">
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="status" class="col-form-label">สถานะ: </label>
                                                 <div class="form-check form-check-inline">
                                                     <label class="form-check-label">
@@ -59,9 +63,13 @@
                                             <input type="hidden" id="_method" name="_method" value="PUT">
                                             <div class="form-group">
                                                 <label for="CategoryNameEdit"
-                                                       class="col-form-label">ชื่อช่องทางขนส่ง:</label>
+                                                       class="col-form-label">ชื่อหมวดหมู่:</label>
                                                 <input type="text" class="form-control" id="CategoryNameEdit"
                                                        name="CategoryName">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="CategoryMaxRequestEdit" class="col-form-label">จำนวนสูงสุดที่เบิกได้: (-1 คือไม่จำกัด)</label>
+                                                <input type="number" class="form-control" id="CategoryMaxRequestEdit" name="CategoryMaxRequest" value="-1">
                                             </div>
                                             <div class="form-group">
                                                 <label for="statusEdit" class="col-form-label">สถานะ: </label>
@@ -90,6 +98,7 @@
                                 <tr>
                                     <th></th>
                                     <th>ชื่อ</th>
+                                    <th>จำนวนที่เบิกได้</th>
                                     <th>สถานะ</th>
                                     <th>#</th>
                                 </tr>
@@ -155,6 +164,7 @@
                         visible: false
                     } ,
                     { data: 'CategoryName' } ,
+                    { data: 'CategoryMaxRequest' } ,
                     {
                         "data": 'CategoryStatus' ,
                         render: function (data) {
@@ -206,18 +216,21 @@
         function setValueFormEdit(data) {
             document.getElementById('IdEdit').value = data['id'];
             document.getElementById('CategoryNameEdit').value = data['CategoryName'];
+            document.getElementById('CategoryMaxRequestEdit').value = data['CategoryMaxRequest'];
             document.getElementById('statusEdit').checked = data['CategoryStatus'] === 0;
             $("#myModalUpdate").modal()
         }
 
         function ccin() {
             document.getElementById('CategoryName').value = "";
+            document.getElementById('CategoryMaxRequest').value = "";
             document.getElementById('status').checked = false;
         }
 
         function checkInput() {
             let name = document.getElementById('CategoryName').value;
-            if (name) {
+            let maxRequest = document.getElementById('CategoryMaxRequest').value;
+            if (name && maxRequest) {
                 $('#myModalInsert').modal('toggle');
                 onSave();
             }
@@ -239,6 +252,7 @@
 
         function onSave() {
             let name = document.getElementById('CategoryName').value;
+            let maxRequest = document.getElementById('CategoryMaxRequest').value;
             let status = document.getElementById('status').checked;
             swal.queue([{
                 title: 'เพิ่มข้อมูลหรือไม่ ?' ,
@@ -294,6 +308,7 @@
                 }
             }]).then(function () {
                 document.getElementById('CategoryName').value = name;
+                document.getElementById('CategoryMaxRequest').value = maxRequest;
                 document.getElementById('status').checked = status;
                 $("#myModalInsert").modal('show')
             });
@@ -301,8 +316,9 @@
 
         function checkInputUpdate() {
             let name = document.getElementById('CategoryNameEdit').value;
+            let maxRequest = document.getElementById('CategoryMaxRequestEdit').value;
             let id = document.getElementById('IdEdit').value;
-            if (name) {
+            if (name && maxRequest) {
                 $('#myModalUpdate').modal('toggle');
                 onUpdate(id);
             }

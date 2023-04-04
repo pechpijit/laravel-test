@@ -3,10 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\ProductCategoryTable;
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class ProductCategorySeeder extends Seeder
 {
@@ -15,14 +12,39 @@ class ProductCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        ProductCategoryTable::create([
-            'CategoryName' => 'เมาส์',
-        ]);
-        ProductCategoryTable::create([
-            'CategoryName' => 'คีย์บอร์ด',
-        ]);
-        ProductCategoryTable::create([
-            'CategoryName' => 'จอมอนิเตอร์',
-        ]);
+        $category = [
+            [
+                'CategoryName' => 'เมาส์',
+                'CategoryStatus' => 1,
+                'CategoryMaxRequest' => 1
+            ],
+            [
+                'CategoryName' => 'คีย์บอร์ด',
+                'CategoryStatus' => 1,
+                'CategoryMaxRequest' => 1
+            ],
+            [
+                'CategoryName' => 'จอมอนิเตอร์',
+                'CategoryStatus' => 1,
+                'CategoryMaxRequest' => -1
+            ],
+            [
+                'CategoryName' => 'หูฟัง',
+                'CategoryStatus' => 0,
+                'CategoryMaxRequest' => 1
+            ],
+            [
+                'CategoryName' => 'โต๊ะ',
+                'CategoryStatus' => 0,
+                'CategoryMaxRequest' => 1
+            ],
+            [
+                'CategoryName' => 'เก้าอี้',
+                'CategoryStatus' => 0,
+                'CategoryMaxRequest' => 1
+            ]
+        ];
+
+        ProductCategoryTable::insert($category);
     }
 }

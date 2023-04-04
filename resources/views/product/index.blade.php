@@ -27,10 +27,6 @@
                                                 <input type="number" class="form-control" id="ProductPrice" name="ProductPrice">
                                             </div>
                                             <div class="form-group">
-                                                <label for="ProductMaxRequest" class="col-form-label">จำนวนสูงสุดที่เบิกได้: (-1 คือไม่จำกัด)</label>
-                                                <input type="number" class="form-control" id="ProductMaxRequest" name="ProductMaxRequest" value="-1">
-                                            </div>
-                                            <div class="form-group">
                                                 <label for="category_id" class="col-form-label">หมวดหมู่อุปกรณ์:</label>
                                                 <select id="category_id" class="selectpicker" data-live-search="true" title="เลือกหมวดหมู่อุปกรณ์" name="category_id">
                                                     @foreach($category as $key => $val)
@@ -74,10 +70,6 @@
                                             <div class="form-group">
                                                 <label for="ProductPriceEdit" class="col-form-label">ราคาอุปกรณ์:</label>
                                                 <input type="number" class="form-control" id="ProductPriceEdit" name="ProductPrice">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="ProductMaxRequestEdit" class="col-form-label">จำนวนสูงสุดที่เบิกได้: (-1 คือไม่จำกัด)</label>
-                                                <input type="number" class="form-control" id="ProductMaxRequestEdit" name="ProductMaxRequest" value="-1">
                                             </div>
                                             <div class="form-group">
                                                 <label for="category_idEdit" class="col-form-label">หมวดหมู่อุปกรณ์:</label>
@@ -223,7 +215,6 @@
             document.getElementById('IdEdit').value = data['id'];
             document.getElementById('ProductNameEdit').value = data['ProductName'];
             document.getElementById('ProductPriceEdit').value = data['ProductPrice'];
-            document.getElementById('ProductMaxRequestEdit').value = data['ProductMaxRequest'];
             document.getElementById('statusEdit').checked = data['ProductStatus'] === 0;
 
             $('.select-eit').selectpicker('val', [data['category_id']]);
@@ -239,8 +230,7 @@
         function checkInput() {
             let name = document.getElementById('ProductName').value;
             let price = document.getElementById('ProductPrice').value;
-            let maxRequest = document.getElementById('ProductMaxRequest').value;
-            if (name && price && maxRequest) {
+            if (name && price) {
                 $('#myModalInsert').modal('toggle');
                 onSave();
             }else {
@@ -262,7 +252,6 @@
         function onSave() {
             let name = document.getElementById('ProductName').value;
             let price = document.getElementById('ProductPrice').value;
-            let maxRequest = document.getElementById('ProductMaxRequest').value;
             let status = document.getElementById('status').checked;
             swal.queue([{
                 title: 'เพิ่มข้อมูลหรือไม่ ?',
@@ -319,7 +308,6 @@
             }]).then(function() {
                 document.getElementById('ProductName').value = name;
                 document.getElementById('ProductPrice').value = price;
-                document.getElementById('ProductMaxRequest').value = maxRequest;
                 document.getElementById('status').checked = status;
                 $("#myModalInsert").modal('show')
             });
@@ -328,10 +316,9 @@
         function checkInputUpdate() {
             let name = document.getElementById('ProductNameEdit').value;
             let price = document.getElementById('ProductPriceEdit').value;
-            let maxRequest = document.getElementById('ProductMaxRequestEdit').value;
             let id = document.getElementById('IdEdit').value;
 
-            if (name && price && maxRequest) {
+            if (name && price) {
                 $('#myModalUpdate').modal('toggle');
                 onUpdate(id);
             }else {
@@ -352,7 +339,6 @@
         function onUpdate(id) {
             let name = document.getElementById('ProductName').value;
             let price = document.getElementById('ProductPrice').value;
-            let maxRequest = document.getElementById('ProductMaxRequest').value;
             let status = document.getElementById('status').checked;
             swal.queue([{
                 title: 'อัพเดทข้อมูลหรือไม่ ?',
@@ -405,7 +391,6 @@
             }]).then(function() {
                 document.getElementById('ProductName').value = name;
                 document.getElementById('ProductPrice').value = price;
-                document.getElementById('ProductMaxRequest').value = maxRequest;
                 document.getElementById('status').checked = status;
                 $('#myModalUpdate').modal()
             });

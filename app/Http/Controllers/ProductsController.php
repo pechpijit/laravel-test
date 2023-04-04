@@ -36,7 +36,6 @@ class ProductsController extends Controller
         $model = new ProductsTable();
         $model->ProductName = $request->ProductName;
         $model->ProductPrice = $request->ProductPrice;
-        $model->ProductMaxRequest = $request->ProductMaxRequest;
         $model->ProductStatus = $request->has('status') ? 0 : 1;
         $model->category_id = $request->category_id;
         $model->save();
@@ -54,6 +53,8 @@ class ProductsController extends Controller
     {
         if ($id == 'all') {
             return DataTables::of(ProductsTable::with('categoryTable'))->toJson();
+        } else if ($id == 'form') {
+            return DataTables::of(ProductsTable::with('categoryTable')->where('ProductStatus',1))->toJson();
         }
     }
 
@@ -73,7 +74,6 @@ class ProductsController extends Controller
         $model = ProductsTable::find($id);
         $model->ProductName = $request->ProductName;
         $model->ProductPrice = $request->ProductPrice;
-        $model->ProductMaxRequest = $request->ProductMaxRequest;
         $model->ProductStatus = $request->has('status') ? 0 : 1;
         $model->category_id = $request->category_id;
         $model->save();

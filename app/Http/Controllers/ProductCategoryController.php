@@ -32,6 +32,7 @@ class ProductCategoryController extends Controller
     {
         $model = new ProductCategoryTable();
         $model->CategoryName = $request->CategoryName;
+        $model->CategoryMaxRequest = $request->CategoryMaxRequest;
         $model->CategoryStatus = $request->has('status') ? 0 : 1;
         $model->save();
 
@@ -66,6 +67,7 @@ class ProductCategoryController extends Controller
     {
         $model = ProductCategoryTable::find($id);
         $model->CategoryName = $request->CategoryName;
+        $model->CategoryMaxRequest = $request->CategoryMaxRequest;
         $model->CategoryStatus = $request->has('status') ? 0 : 1;
         $model->save();
 
