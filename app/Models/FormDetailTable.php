@@ -15,6 +15,7 @@ class FormDetailTable extends Model
         'id',
         'form_id',
         'product_id',
+        'category_id',
         'description',
         'amount',
         'type',
@@ -31,5 +32,10 @@ class FormDetailTable extends Model
     public function productsTable()
     {
         return $this->belongsTo(ProductsTable::class,'product_id');
+    }
+
+    public function categoryTable()
+    {
+        return $this->belongsTo(ProductCategoryTable::class,'category_id');
     }
 }

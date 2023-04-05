@@ -18,9 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 //Route::view('/welcome', 'dashboard', ['name' => 'Taylor']);
 
@@ -28,19 +25,26 @@ Route::get('/', function () {
 //    return view('home');
 //})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('home');
-    })->name('dashboard');
+Route::prefix('admin')->group(function () {
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('home');
+        })->name('dashboard');
 
-    Route::resource('/product-category', ProductCategoryController::class);
-    Route::resource('/products', ProductsController::class);
-    Route::resource('/users', UsersController::class);
+        Route::resource('/product-category', ProductCategoryController::class);
+        Route::resource('/products', ProductsController::class);
+        Route::resource('/users', UsersController::class);
+    });
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [FormsController::class, 'index']);
     Route::resource('/form', FormsController::class);
-
+    Route::resource('/products', ProductsController::class)->only(['show']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__ . '/auth.php';

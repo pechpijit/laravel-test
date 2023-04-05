@@ -2,6 +2,7 @@
 
 use App\Models\FormDetailTable;
 use App\Models\FormsTable;
+use App\Models\ProductCategoryTable;
 use App\Models\ProductsTable;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,6 +20,8 @@ return new class extends Migration {
             $table->foreign('form_id')->references('id')->on((new FormsTable())->getTable());
             $table->unsignedBigInteger('product_id')->unsigned()->nullable();
             $table->foreign('product_id')->references('id')->on((new ProductsTable())->getTable());
+            $table->unsignedBigInteger('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on((new ProductCategoryTable())->getTable());
             $table->string('description')->nullable();
             $table->integer('type')->nullable();
             $table->string('other_name')->nullable();

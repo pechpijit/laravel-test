@@ -230,9 +230,9 @@
                                     <li>
                                         <a href="{{url('profile')}}"><i class="icon-user"></i> <span>Profile</span></a>
                                     </li>
-                                    <li>
-                                        <a href="#"><i class="icon-user"></i> <span>Change Password</span></a>
-                                    </li>
+{{--                                    <li>--}}
+{{--                                        <a href="#"><i class="icon-user"></i> <span>Change Password</span></a>--}}
+{{--                                    </li>--}}
                                     {{--                                    <li>--}}
                                     {{--                                        <a href="javascript:void()">--}}
                                     {{--                                            <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>--}}
@@ -268,7 +268,7 @@
     <div class="nk-sidebar">
         <div class="nk-nav-scroll">
             <ul class="metismenu" id="menu">
-                @if(Auth::user()->isAdmin())
+                @if(Auth::check() && Auth::user()->isAdmin())
                     <li class="nav-label">Admin</li>
                     {{--                <li>--}}
                     {{--                    <a href="{{ url('admin/home') }}" aria-expanded="false">--}}
@@ -286,12 +286,12 @@
                     {{--                    </a>--}}
                     {{--                </li>--}}
                     <li>
-                        <a href="{{ url('product-category') }}" aria-expanded="false">
+                        <a href="{{ url('admin/product-category') }}" aria-expanded="false">
                             <i class="icon-rocket menu-icon"></i><span class="nav-text">หมวดหมู่อุปกรณ์</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('products') }}" aria-expanded="false">
+                        <a href="{{ url('admin/products') }}" aria-expanded="false">
                             <i class="icon-rocket menu-icon"></i><span class="nav-text">รายการอุปกรณ์</span>
                         </a>
                     </li>
@@ -301,7 +301,7 @@
                     {{--                    </a>--}}
                     {{--                </li>--}}
                     <li>
-                        <a href="{{ url('users') }}" aria-expanded="false">
+                        <a href="{{ url('admin/users') }}" aria-expanded="false">
                             <i class="icon-people menu-icon"></i><span class="nav-text">รายชื่อพนักงาน</span>
                         </a>
                     </li>

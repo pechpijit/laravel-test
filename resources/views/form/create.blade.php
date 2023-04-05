@@ -39,6 +39,71 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="modal fade" id="myModalProductList">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">เลือกอุปกรณ์</h5>
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="table-responsive">
+                                            <table class="table zero-configuration" id="data-server-side" style="width:100%">
+                                                <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>หมวดหมู่</th>
+                                                    <th>ชื่อสินค้า</th>
+                                                    <th>ราคา</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="myModalInsert">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">เพิ่มอุปกรณ์อื่นๆ</h5>
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="formInsert" autocomplete="off">
+                                            <div class="form-group">
+                                                <label for="c" class="col-form-label">ชื่ออุปกรณ์:</label>
+                                                <textarea type="text" class="form-control" id="OtherDetail" name="OtherDetail" rows="5"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="CategoryMaxRequest" class="col-form-label">ราคา</label>
+                                                <input type="number" class="form-control" id="OtherPrice" name="OtherPrice" value="0">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="category_id" class="col-form-label">หมวดหมู่อุปกรณ์:</label>
+                                                <select id="category_id" class="selectpicker select-insert" data-live-search="true" title="เลือกหมวดหมู่อุปกรณ์" name="category_id">
+                                                    @foreach($category as $key => $val)
+                                                        <option value="{{$val->id}}" data-maxrequest="{{$val->CategoryMaxRequest}}">{{$val->CategoryName}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary text-white" data-dismiss="modal"
+                                                onclick="ccin()">ยกเลิก
+                                        </button>
+                                        <button type="button" class="btn btn-primary" onclick="checkInput()">เพิ่ม
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <h4 class="card-title">สร้างแบบฟอร์มเบิกอุปกรณ์</h4>
                         <div class="table-responsive">
                             <form id="insertOrder" action="{{url('form')}}" method="POST">
@@ -65,71 +130,6 @@
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalInsert">
                                             เพิ่มอุปกรณ์อื่นๆ <span class="btn-icon-right"><i class="fa fa-plus"></i></span>
                                         </button>
-                                        <div class="modal fade" id="myModalProductList">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">เลือกอุปกรณ์</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table zero-configuration" id="data-server-side" style="width:100%">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th>หมวดหมู่</th>
-                                                                    <th>ชื่อสินค้า</th>
-                                                                    <th>ราคา</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal fade" id="myModalInsert">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">เพิ่มอุปกรณ์อื่นๆ</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form id="formInsert" autocomplete="off">
-                                                            <div class="form-group">
-                                                                <label for="c" class="col-form-label">ชื่ออุปกรณ์:</label>
-                                                                <textarea type="text" class="form-control" id="OtherDetail" name="OtherDetail" rows="5"></textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="CategoryMaxRequest" class="col-form-label">ราคา</label>
-                                                                <input type="number" class="form-control" id="OtherPrice" name="OtherPrice" value="0">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="category_id" class="col-form-label">หมวดหมู่อุปกรณ์:</label>
-                                                                <select id="category_id" class="selectpicker select-insert" data-live-search="true" title="เลือกหมวดหมู่อุปกรณ์" name="category_id">
-                                                                    @foreach($category as $key => $val)
-                                                                        <option value="{{$val->id}}">{{$val->CategoryName}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary text-white" data-dismiss="modal"
-                                                                onclick="ccin()">ยกเลิก
-                                                        </button>
-                                                        <button type="button" class="btn btn-primary" onclick="checkInput()">เพิ่ม
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <br>
@@ -142,12 +142,12 @@
                                             <div id="val-username-error" class="invalid-feedback animated fadeInDown" style="display: block;">{{ $message }}</div>
                                             @enderror
                                         </div>
-{{--                                        <div class="form-group col-md-4">--}}
-{{--                                            <a href="{{url()->previous()}}">--}}
-{{--                                                <button type="button" class="btn btn-danger pull-left">กลับ</button>--}}
-{{--                                            </a>--}}
-{{--                                            <button type="button" class="btn btn-primary pull-right" onclick="checkInput()">เพิ่ม</button>--}}
-{{--                                        </div>--}}
+                                        {{--                                        <div class="form-group col-md-4">--}}
+                                        {{--                                            <a href="{{url()->previous()}}">--}}
+                                        {{--                                                <button type="button" class="btn btn-danger pull-left">กลับ</button>--}}
+                                        {{--                                            </a>--}}
+                                        {{--                                            <button type="button" class="btn btn-primary pull-right" onclick="checkInput()">เพิ่ม</button>--}}
+                                        {{--                                        </div>--}}
                                     </div>
                                 </div>
                                 <button type="button" onclick="submit()" class="btn btn-primary pull-right">เพิ่ม</button>
@@ -230,31 +230,7 @@
             let table = $('#data-server-side').DataTable();
             $('#data-server-side tbody').on('click' , 'tr' , function () {
                 let data = table.row(this).data();
-                let allCells = $('#data-products tbody tr td:nth-child(1)');
-                let textMapping = {};
-                let status = false;
-
-                let categoryCount = [];
-
-                allCells.each(function () {
-                    if (categoryCount[$(this).text()] === undefined) {
-                        categoryCount[$(this).text()] = 1
-                    } else {
-                        categoryCount[$(this).text()] = categoryCount[$(this).text()] + 1;
-                    }
-                });
-
-                if (data['category_table']['CategoryMaxRequest'] === -1) {
-                    status = true
-                } else if (data['category_table']['CategoryMaxRequest'] > 0) {
-                    if (categoryCount[data['category_id']] === undefined || categoryCount[data['category_id']] < data['category_table']['CategoryMaxRequest']) {
-                        status = true;
-                    }
-                }
-
-                console.log('status' , status);
-
-                if (status) {
+                if (checkMaxRequest(data['category_table']['CategoryMaxRequest'] , data['category_id'])) {
                     let dataProduct = ' <tr class="items list-product">'
                         + '<td style="display:none;">' + data['category_id'] + '</td>'
                         + '<td><label class="col-form-label">' + data['category_table']['CategoryName'] + '</label><input class="form-control" name="items[0][category_id]" type="hidden" value="' + data['category_id'] + '"></td>'
@@ -268,14 +244,41 @@
                 }
                 else {
                     swal({
-                        title: `ไม่สามารถเบิกอุปกรณ์เพิ่มได้`,
-                        text: `หมวดหมู่ "${data['category_table']['CategoryName']}" เบิกได้ไม่เกิน ${data['category_table']['CategoryMaxRequest']} หน่วย` ,
+                        title: `ไม่สามารถเบิกอุปกรณ์เพิ่มได้` ,
+                        text: `หมวดหมู่ "${ data['category_table']['CategoryName'] }" เบิกได้ไม่เกิน ${ data['category_table']['CategoryMaxRequest'] } หน่วย` ,
                         timer: 4000 ,
                         type: "error" ,
                         showConfirmButton: false
                     });
                 }
             });
+        }
+
+        function checkMaxRequest(maxRequest , categoryId) {
+            console.log('===checkMaxRequest===')
+            console.log('maxRequest' , maxRequest)
+            console.log('categoryId' , categoryId)
+
+            let allCells = $('#data-products tbody tr td:nth-child(1)');
+            let categoryCount = [];
+
+            allCells.each(function () {
+                if (categoryCount[$(this).text()] === undefined) {
+                    categoryCount[$(this).text()] = 1
+                }
+                else {
+                    categoryCount[$(this).text()] = categoryCount[$(this).text()] + 1;
+                }
+            });
+
+            if (maxRequest === -1) {
+                return true
+            }
+            else if (maxRequest > 0) {
+                if (categoryCount[categoryId] === undefined || categoryCount[categoryId] < maxRequest) {
+                    return true;
+                }
+            }
         }
 
         //ลบrecordสินค้า
@@ -297,31 +300,46 @@
         function checkInput() {
             let OtherDetail = document.getElementById('OtherDetail').value;
             let price = document.getElementById('OtherPrice').value;
-            let category = $('#category_id').val();
-            let categoryText = $( "#category_id :selected" ).text();
-            if (OtherDetail && price && category) {
-                $('#myModalInsert').modal('toggle');
+            let categoryId = $('#category_id').val();
+            let categoryText = $('#category_id :selected').text();
+            if (OtherDetail && price && categoryId) {
+                let selected = $('#category_id').find('option:selected');
+                let maxrequest = selected.data('maxrequest');
 
-                console.log(categoryText)
-                let dataProduct = ' <tr class="items list-product">'
-                    + '<td style="display:none;">' + category + '</td>'
-                    + '<td><label class="col-form-label">' + categoryText + '</label><input class="form-control" name="items[0][category_id]" type="hidden" value="' + category + '"></td>'
-                    + '<td><label class="col-form-label">' + OtherDetail + '</label><input class="form-control" name="items[0][other_name]" type="hidden" value="' + OtherDetail + '"><input class="form-control" name="items[0][type]" type="hidden" value="2"></td>'
-                    + '<td><label class="col-form-label">' + price + '</label><input class="form-control" name="items[0][other_price]" type="hidden" value="' + price + '"></td>'
-                    + '<td><input class="form-control" name="items[0][description]" type="text" value="" placeholder="หมายเหตุเพิ่มเติม"></td>'
-                    + '<td style="text-align: center;"><button class="btn btn-danger deleteProduct" type="button"><i class="fa fa-trash"></i></button></td>'
-                    + '</tr>';
-                $('#data-products tbody').append(dataProduct);
+                console.log('maxrequest' , maxrequest)
+                console.log('categoryText' , categoryText)
 
-                renameTableIndex()
-            }else {
-                $('#myModalInsert').modal('toggle');
+                if (checkMaxRequest(maxrequest , categoryId)) {
+                    let dataProduct = ' <tr class="items list-product">'
+                        + '<td style="display:none;">' + categoryId + '</td>'
+                        + '<td><label class="col-form-label">' + categoryText + '</label><input class="form-control" name="items[0][category_id]" type="hidden" value="' + categoryId + '"></td>'
+                        + '<td><label class="col-form-label">' + OtherDetail + '</label><input class="form-control" name="items[0][other_name]" type="hidden" value="' + OtherDetail + '"><input class="form-control" name="items[0][type]" type="hidden" value="2"></td>'
+                        + '<td><label class="col-form-label">' + price + '</label><input class="form-control" name="items[0][other_price]" type="hidden" value="' + price + '"></td>'
+                        + '<td><input class="form-control" name="items[0][description]" type="text" value="" placeholder="หมายเหตุเพิ่มเติม"></td>'
+                        + '<td style="text-align: center;"><button class="btn btn-danger deleteProduct" type="button"><i class="fa fa-trash"></i></button></td>'
+                        + '</tr>';
+                    $('#data-products tbody').append(dataProduct);
+
+                    renameTableIndex();
+                    $('#myModalInsert').modal('toggle');
+                }
+                else {
+                    swal({
+                        title: `ไม่สามารถเบิกอุปกรณ์เพิ่มได้` ,
+                        text: `หมวดหมู่ "${ categoryText }" เบิกได้ไม่เกิน ${ maxrequest } หน่วย` ,
+                        timer: 4000 ,
+                        type: "error" ,
+                        showConfirmButton: false
+                    });
+                }
+            }
+            else {
                 swal({
-                    title: "กรุณากรอกข้อมูลให้ครบถ้วน",
-                    text: "",
+                    title: "กรุณากรอกข้อมูลให้ครบถ้วน" ,
+                    text: "" ,
                     // timer: 2000,
-                    type: "error",
-                    showConfirmButton: true,
+                    type: "error" ,
+                    showConfirmButton: true ,
                     confirmButtonText: 'ตกลง'
                 }).then(function () {
                     $("#myModalInsert").modal('show')

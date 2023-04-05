@@ -140,7 +140,7 @@
                 serverSide: true,
                 destroy: true,
                 ajax:{
-                    url:  '{{ url('products/all') }}',
+                    url:  '{{ url('admin/products/all') }}',
                     type: "GET",
                     dataFilter: function(reps) {
                         swal.close();
@@ -272,7 +272,7 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             enctype: 'multipart/form-data',
-                            url: '{{url('products')}}',
+                            url: '{{url('admin/products')}}',
                             data: data,
                             processData: false,
                             contentType: false,
@@ -282,7 +282,7 @@
                                 console.log(data);
                                 if (data.status === 'success') {
                                     setTimeout(function () {
-                                        window.location.href = "{{url('products')}}";
+                                        window.location.href = "{{url('admin/products')}}";
                                     }, 500);
                                     swal({
                                         title: "ทำรายการสำเร็จแล้ว",
@@ -356,7 +356,7 @@
                         $.ajax({
                             type: 'POST',
                             enctype: 'multipart/form-data',
-                            url: '{{url('products')}}/'+id,
+                            url: '{{url('admin/products')}}/'+id,
                             data: data,
                             processData: false,
                             contentType: false,
@@ -365,7 +365,7 @@
                             success: function (data) {
                                 if (data.status === 'success') {
                                     setTimeout(function () {
-                                        window.location.href = "{{url('products')}}";
+                                        window.location.href = "{{url('admin/products')}}";
                                     }, 500);
                                     swal({
                                         title: "อัพเดทข้อมูลสำเร็จแล้ว",
@@ -413,7 +413,7 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             type: "POST",
-                            url: '{{url('products')}}/'+id,
+                            url: '{{url('admin/products')}}/'+id,
                             data: {
                                 "_method": 'DELETE'
                             },
@@ -423,7 +423,7 @@
                                 console.log(data);
                                 if (data === 'success') {
                                     setTimeout(function () {
-                                        window.location.href = "{{url('products')}}";
+                                        window.location.href = "{{url('admin/products')}}";
                                     }, 500);
                                     swal({
                                         title: "ทำรายการสำเร็จแล้ว",

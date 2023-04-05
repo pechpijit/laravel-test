@@ -139,7 +139,7 @@
                 serverSide: true ,
                 destroy: true ,
                 ajax: {
-                    url: '{{ url('product-category/all') }}' ,
+                    url: '{{ url('admin/product-category/all') }}' ,
                     type: "GET" ,
                     dataFilter: function (reps) {
                         swal.close();
@@ -186,7 +186,7 @@
                 var row = dt.row(tr);
                 var data = row.data();
 
-                window.location.href = "{{url('product-category')}}/" + data['id'];
+                window.location.href = "{{url('admin/product-category')}}/" + data['id'];
             });
 
             $('#data-server-side tbody').on('click' , 'tr td button.edit-control' , function () {
@@ -273,7 +273,7 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             } ,
                             enctype: 'multipart/form-data' ,
-                            url: '{{url('product-category')}}' ,
+                            url: '{{url('admin/product-category')}}' ,
                             data: data ,
                             processData: false ,
                             contentType: false ,
@@ -283,7 +283,7 @@
                                 console.log(data);
                                 if (data.status === 'success') {
                                     setTimeout(function () {
-                                        window.location.href = "{{url('product-category')}}";
+                                        window.location.href = "{{url('admin/product-category')}}";
                                     } , 500);
                                     swal({
                                         title: "ทำรายการสำเร็จแล้ว" ,
@@ -354,7 +354,7 @@
                         $.ajax({
                             type: 'POST' ,
                             enctype: 'multipart/form-data' ,
-                            url: '{{url('product-category')}}/' + id ,
+                            url: '{{url('admin/product-category')}}/' + id ,
                             data: data ,
                             processData: false ,
                             contentType: false ,
@@ -363,7 +363,7 @@
                             success: function (data) {
                                 if (data.status === 'success') {
                                     setTimeout(function () {
-                                        window.location.href = "{{url('product-category')}}";
+                                        window.location.href = "{{url('admin/product-category')}}";
                                     } , 500);
                                     swal({
                                         title: "อัพเดทข้อมูลสำเร็จแล้ว" ,
@@ -408,7 +408,7 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             } ,
                             type: "POST" ,
-                            url: '{{url('product-category')}}/' + id ,
+                            url: '{{url('admin/product-category')}}/' + id ,
                             data: {
                                 "_method": 'DELETE'
                             } ,
@@ -418,7 +418,7 @@
                                 console.log(data);
                                 if (data === 'success') {
                                     setTimeout(function () {
-                                        window.location.href = "{{url('product-category')}}";
+                                        window.location.href = "{{url('admin/product-category')}}";
                                     } , 500);
                                     swal({
                                         title: "ทำรายการสำเร็จแล้ว" ,

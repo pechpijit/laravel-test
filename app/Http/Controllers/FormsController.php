@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CreateFormShipped;
 use App\Models\FormDetailTable;
 use App\Models\FormsTable;
 use App\Models\ProductCategoryTable;
+use App\Models\ProductsTable;
+use App\Models\User;
+use DB;
 use Dflydev\DotAccessData\Data;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 
 class FormsController extends Controller
@@ -45,8 +51,12 @@ class FormsController extends Controller
                 $formDetail->form_id = $form->id;
                 $formDetail->type = $val['type'];
                 $formDetail->description = $val['description'];
+                $formDetail->category_id = $val['category_id'];
+
                 if ($val['type'] == 1 || $val['type'] == '1') {
+                    $product = ProductsTable::find($val['product_id']);
                     $formDetail->product_id = $val['product_id'];
+                    $formDetail->other_price = $product->ProductPrice;
                 } else {
                     $formDetail->other_name = $val['other_name'];
                     $formDetail->other_price = $val['other_price'];
@@ -55,13 +65,11 @@ class FormsController extends Controller
             }
         } catch (\Exception $exception) {
             FormsTable::destroy($form->id);
-            return dd([
-                'request' => $request,
-                'exception' => $exception
-            ]);
+            return back();
         }
 
-        return $request;
+        Mail::to('pechpijit@unixdev.co.th')->send(new CreateFormShipped($form));
+        return redirect()->action([FormsController::class, 'show'],['form' => $form->id]);
     }
 
     /**
@@ -79,10 +87,14 @@ class FormsController extends Controller
             });
             return DataTables::of($model)->toJson();
         } else {
-            $model = FormsTable::with('formDetailTable.productsTable')->where('id', $id)->get()->each(function ($items) {
-                $items->append('create_date');
-            });
-            return DataTables::of($model)->toJson();
+            $model = FormsTable::with('usersTable')
+                ->with('formDetailTable.productsTable.categoryTable')
+                ->withSum('formDetailTable as sum_other_price', 'other_price')
+                ->where('id', $id)->first()->append('create_date');
+//            return $model;
+            return view('form.show', [
+                'data' => $model
+            ]);
         }
     }
 

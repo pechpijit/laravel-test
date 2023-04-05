@@ -114,7 +114,7 @@
                 var row = dt.row(tr);
                 var data = row.data();
 
-                window.location.href = "{{url('product-category')}}/" + data['id'];
+                window.location.href = "{{url('form')}}/" + data['id'];
             });
 
             $('#data-server-side tbody').on('click' , 'tr td button.edit-control' , function () {
